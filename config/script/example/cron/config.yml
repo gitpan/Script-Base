@@ -1,0 +1,12 @@
+---
+option:
+    options:
+        - path=s
+        - id=s@
+        - jump!
+        - fly
+        - count=i
+    defaults:
+        quiet: 0
+        count: 5
+        jump: 1

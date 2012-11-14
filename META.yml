@@ -1,0 +1,36 @@
+---
+abstract: 'Bootstrap your scripts'
+author:
+  - 'Nour Sharabash <amirite@cpan.org>'
+build_requires: {}
+configure_requires:
+  ExtUtils::MakeMaker: 6.30
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.300028, CPAN::Meta::Converter version 2.120921'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Script-Base
+requires:
+  Carp: 0
+  Class::Data::Inheritable: 0
+  Class::Exporter: 0
+  DBI: 0
+  DBIx::Simple: 0
+  Data::Dumper: 0
+  FindBin: 0
+  Getopt::Long: 0
+  IO::All: 0
+  IO::File: 0
+  Mojo::Base: 0
+  Pod::Usage: 0
+  Scalar::Util: 0
+  String::CamelCase: 0
+  YAML: 0
+  base: 0
+  mro: 0
+resources:
+  bugtracker: https://github.com/quran/script-base/issues
+  repository: git://github.com/quran/script-base.git
+version: 0.01

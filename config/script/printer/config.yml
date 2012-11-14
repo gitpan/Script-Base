@@ -1,0 +1,9 @@
+---
+option:
+    options:
+        - timestamp!
+        - verbose!
+        - debug!
+        - quiet!
+        - pid!
+    defaults:

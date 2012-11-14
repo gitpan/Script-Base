@@ -1,0 +1,62 @@
+{
+   "abstract" : "Bootstrap your scripts",
+   "author" : [
+      "Nour Sharabash <amirite@cpan.org>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.300028, CPAN::Meta::Converter version 2.120921",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Script-Base",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "ExtUtils::MakeMaker" : "6.30"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Test::Pod" : "1.41"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Carp" : "0",
+            "Class::Data::Inheritable" : "0",
+            "Class::Exporter" : "0",
+            "DBI" : "0",
+            "DBIx::Simple" : "0",
+            "Data::Dumper" : "0",
+            "FindBin" : "0",
+            "Getopt::Long" : "0",
+            "IO::All" : "0",
+            "IO::File" : "0",
+            "Mojo::Base" : "0",
+            "Pod::Usage" : "0",
+            "Scalar::Util" : "0",
+            "String::CamelCase" : "0",
+            "YAML" : "0",
+            "base" : "0",
+            "mro" : "0"
+         }
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/quran/script-base/issues"
+      },
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/quran/script-base.git",
+         "web" : "https://github.com/quran/script-base"
+      }
+   },
+   "version" : "0.01"
+}
+

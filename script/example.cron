@@ -1,0 +1,20 @@
+#!/usr/bin/env perl
+# vim: ts=4 sw=4 filetype=perl noexpandtab
+
+BEGIN {
+	use File::Basename 'dirname';
+	use File::Spec::Functions qw/catdir splitdir/;
+
+	my @base = ( splitdir( dirname( __FILE__ ) ), '..' );
+	my $lib = join '/', @base, 'lib';
+	unshift @INC, $lib;
+}
+
+use Mojo::Base -strict;
+use Script::Example::Cron;
+
+my $script = new Script::Example::Cron;
+
+$script->run;
+
+1;

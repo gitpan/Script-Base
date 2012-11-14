@@ -1,0 +1,30 @@
+---
+connection:
+    default:
+        dsn: dbi:mysql:database=stuff_db
+        option:
+            mysql_enable_utf8: 1
+            mysql_auto_reconnect: 1
+    cron:
+        dsn: dbi:mysql:database=cron_db
+        username: hurricane
+        password: sandy
+        option:
+            mysql_enable_utf8: 0
+            mysql_auto_reconnect: 1
+    another:
+        dsn: dbi:Pg:dbname=foo
+        username: george
+        option:
+            pg_bool_tf: 0
+            pg_enable_utf8: 1
+            AutoCommit: 1
+            RaiseError: 0
+fallback:
+    username: john
+    password: doe
+    option:
+        AutoCommit: 0
+        RaiseError: 1
+        PrintError: 1
+

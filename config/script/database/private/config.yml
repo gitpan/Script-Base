@@ -1,0 +1,17 @@
+---
+connection:
+    default:
+        dsn: dbi:mysql:database=stuff_db;host=127.0.0.1;port=6033
+        password: hobojoe
+        option:
+            RaiseError: 0
+    another:
+        dsn: dbi:Pg:dbname=foo;host=127.0.0.1;port=2345
+        password: secret
+        option:
+            PrintError: 0
+    cron:
+        username: override
+        option:
+            AutoCommit: 1
+
