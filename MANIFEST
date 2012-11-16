@@ -1,13 +1,13 @@
+Changes
 LICENSE
 MANIFEST
 META.json
 META.yml
 Makefile.PL
 README
-config/script/database/config.yml
-config/script/database/private/config.yml
-config/script/example/cron/config.yml
-config/script/printer/config.yml
+config/database/config.yml
+config/database/private/config.yml
+config/example/cron/config.yml
 dist.ini
 lib/Script/Base.pm
 lib/Script/Config.pm

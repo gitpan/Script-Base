@@ -1,7 +1,7 @@
 # vim: ts=4 sw=4 noexpandtab
 package Script::Database;
 {
-  $Script::Database::VERSION = '0.01';
+  $Script::Database::VERSION = '0.02';
 }
 use Mojo::Base 'Script::Base';
 use DBIx::Simple;
@@ -120,7 +120,7 @@ Script::Database - Database component for Script::Base
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 AUTHOR
 

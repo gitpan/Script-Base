@@ -1,6 +1,6 @@
 package Script::Example::Cron;
 {
-  $Script::Example::Cron::VERSION = '0.01';
+  $Script::Example::Cron::VERSION = '0.02';
 }
 use Mojo::Base 'Script::Base';
 
@@ -52,7 +52,7 @@ Script::Example::Cron - Example Script Package for Script::Base
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 AUTHOR
 

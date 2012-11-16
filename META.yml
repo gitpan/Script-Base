@@ -33,4 +33,4 @@ requires:
 resources:
   bugtracker: https://github.com/quran/script-base/issues
   repository: git://github.com/quran/script-base.git
-version: 0.01
+version: 0.02

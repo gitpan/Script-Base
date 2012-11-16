@@ -1,7 +1,7 @@
 # vim: ts=4 sw=4 noexpandtab
 package Script::Config;
 {
-  $Script::Config::VERSION = '0.01';
+  $Script::Config::VERSION = '0.02';
 }
 use Mojo::Base -base;
 use YAML qw/LoadFile DumpFile/;
@@ -110,7 +110,7 @@ Script::Config - Config component for Script::Base
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 AUTHOR
 

@@ -1,7 +1,7 @@
 # vim: ts=4 sw=4 noexpandtab
 package Script::Printer;
 {
-  $Script::Printer::VERSION = '0.01';
+  $Script::Printer::VERSION = '0.02';
 }
 use Mojo::Base 'Script::Base';
 use base 'Class::Exporter';
@@ -27,7 +27,6 @@ sub verbose {
 	my $self = shift;
 	return if $self->option->{quiet};
 	return unless $self->{init} and $self->option->{verbose};
-	
 	print STDOUT $self->_prefix . '[verbose] ', join ( "\n[verbose] ", @_ ), "\n";
 }
 
@@ -35,7 +34,6 @@ sub debug {
 	my $self = shift;
 	return if $self->option->{quiet};
 	return unless $self->{init} and $self->option->{debug};
-	$self->dump( 'option', $self->option );
 	print STDOUT $self->_prefix . '[debug] ', join ( "\n[debug] ", @_ ), "\n";
 }
 
@@ -72,7 +70,9 @@ sub fatal {
 
 sub dump {
 	my $self = shift;
-	return if $self->option->{quiet};
+	my $forced = 1 if ref $_[-1] eq 'HASH' and $_[-1]->{__forced__}; pop @_ if $forced;
+	return if $self->option->{quiet} and not $forced;
+	return unless $forced or not $self->{init} and ( $self->option->{ 'dump-config' } or $self->option->{ 'dump-option' } ) or $self->{init} and $self->option->{dump};
 	print STDERR $self->_prefix . ( ref $_ ? "[dump]\n". Dumper( $_ ) : "[dump] $_\n" ) for @_;
 }
 
@@ -103,7 +103,7 @@ Script::Printer - Printer component for Script::Base
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 AUTHOR
 

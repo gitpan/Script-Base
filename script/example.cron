@@ -13,7 +13,7 @@ BEGIN {
 use Mojo::Base -strict;
 use Script::Example::Cron;
 
-my $script = new Script::Example::Cron;
+my $script = new Script::Example::Cron ( namespace => 'script' );
 
 $script->run;
 

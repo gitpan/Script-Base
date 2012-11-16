@@ -1,7 +1,7 @@
 # vim: ts=4 sw=4 noexpandtab
 package Script::Base;
 {
-  $Script::Base::VERSION = '0.01';
+  $Script::Base::VERSION = '0.02';
 }
 use Mojo::Base -base;
 use base 'Class::Data::Inheritable';
@@ -43,9 +43,8 @@ has printer => sub {
 		, debug => 1
 		, quiet => 0
 		, pid => 1
-		, %{ $self->option } #( $self->super and ref $self->super->option ) ? %{ $self->super->option } : ref $self->option ? %{ $self->option } : ()
+		, %{ $self->option }
 	);
-
 
 	my $printer = new Script::Printer (
 		super => $self
@@ -55,10 +54,17 @@ has printer => sub {
 	return $printer;
 };
 has 'super';
+has namespace => sub { 'script' };
 
-sub _config {
+sub _build_config {
 	my $self = shift;
 	my @path = map { decamelize( $_ ) } split /::/, ref $self;
+	my @grep = $self->namespace ? map { decamelize( $_ ) } split /[.:\/]+/, $self->namespace : ();
+	while ( my $grep = shift @grep ) { # remove namespace
+		my $path = shift @path;
+		unshift @path, $path and last unless lc $path eq lc $grep;
+	}
+
 	my $path = join '/', $self->base, qw/config/, @path;
 	my $conf = new Script::Config ( config => $path );
 
@@ -78,7 +84,7 @@ sub new {
 	weaken( $super = delete $self->{super} ) if $self->{super};
 	$self->super( $super ) if $super;
 
-	$self->_config;
+	$self->_build_config;
 	$self->config( %conf ) if %conf;
 
 	for my $key ( keys %{ $self->config } ) {
@@ -88,7 +94,7 @@ sub new {
 	}
 
 
-	$self->_build_option;
+	$self->_build_option( %conf );
 
 	$self->init;
 
@@ -140,14 +146,15 @@ sub path {
 }
 
 sub _build_option {
-	my $self = shift;
-	my %option;
+	my ( $self, %opts ) = @_;
+	my ( %option );
 
 	$self->merge( \%option, $self->config->{option}->{defaults} ) if $self->config->{option}->{defaults};
 	$self->merge( \%option, $self->super->option ) if $self->super and $self->super->option;
+	$self->merge( \%option, \%opts ) if %opts;
 
 	GetOptions( \%option
-		, qw/dump-option|do dump-config|dc timestamp! verbose! debug! quiet! pid! help/
+		, qw/dump-option|do! dump-config|dc! timestamp! verbose! debug! dump! quiet! pid! help/
 		, $self->config->{option}->{options} ? @{ $self->config->{option}->{options} } : ()
 	) or pod2usage( 1 );
 
@@ -176,7 +183,7 @@ sub connect_db { # TODO: put this in Script::Database
 	my ( %config, %dbc, @dbc, $dbh );
 
 	$self->merge( \%config, new Script::Config (
-		config => $self->base .'/config/script/database'
+		config => $self->base .'/config/database'
 	) );
 
 	$self->merge( \%config, $self->config->{database} )
@@ -289,7 +296,7 @@ Script::Base - Bootstrap your scripts
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 SYNOPSIS
 
@@ -299,34 +306,7 @@ version 0.01
 
 =head1 DESCRIPTION
 
-=head1 NAME
-
-Script::Base
-
 =head1 SEE ALSO
-
-=head1 AUTHOR
-
-Nour Sharabash <F<amirite@cpan.org>>
-
-=head1 COPYRIGHT AND DISCLAIMER
-
-This program is Copyright 2012 by Nour Sharabash.
-
-This program is free software; you can redistribute it and/or
-modify it under the terms of the Perl Artistic License or the
-GNU General Public License as published by the Free Software
-Foundation; either version 2 of the License, or (at your option) any
-later version.
-
-This program is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-If you do not have a copy of the GNU General Public License write to
-the Free Software Foundation, Inc., 675 Mass Ave, Cambridge,
-MA 02139, USA.
 
 =head1 AUTHOR
 
